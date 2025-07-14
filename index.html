@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fondo Ahorro - PWA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#004d40"/>
+  <link rel="icon" href="icon-512.png" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log("Service worker registrado"))
+        .catch(err => console.log("Error al registrar service worker", err));
+    }
+  </script>
+</head>
+<body style="font-family:sans-serif;text-align:center;padding:20px;">
+  <h1>Bienvenido a la App Fondo Ahorro</h1>
+  <img src="icon-512.png" alt="Ícono" style="width:128px;height:128px;">
+  <p>Haz clic para abrir la app completa:</p>
+  <a href="fondo_ahorro_completo.html">
+    <button style="padding:12px 24px;font-size:16px;background:#004d40;color:white;border:none;border-radius:6px;">Entrar a la App</button>
+  </a>
+</body>
+</html>
