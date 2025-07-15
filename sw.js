@@ -4,14 +4,13 @@ self.addEventListener("install", function(e) {
     caches.open("fondo-ahorro-cache").then(function(cache) {
       return cache.addAll([
         "index.html",
+        "fondo_ahorro_completo.html",
         "manifest.json",
-        "icon-512.png",
-        "fondo_ahorro_completo.html"
+        "icon-512.png"
       ]);
     })
   );
 });
-
 self.addEventListener("fetch", function(e) {
   e.respondWith(
     caches.match(e.request).then(function(response) {
