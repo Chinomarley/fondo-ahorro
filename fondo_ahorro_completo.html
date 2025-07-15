@@ -3,22 +3,25 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Fondo Ahorro - OCR + Duración</title>
+  <title>Fondo Ahorro - OCR Manual</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; background: #eef2f3; padding: 20px; max-width: 900px; margin: auto; }
     h1 { color: #004d40; }
-    label { font-weight: bold; }
-    input, select { width: 100%; padding: 10px; margin: 10px 0; }
+    label { font-weight: bold; display: block; margin-top: 15px; }
+    input, select, button { width: 100%; padding: 10px; margin-top: 10px; }
     .result { background: #e0f2f1; padding: 15px; border-radius: 8px; margin-top: 20px; }
+    #processButton { background-color: #004d40; color: white; border: none; border-radius: 5px; }
+    #processButton:hover { background-color: #00695c; }
   </style>
 </head>
 <body>
-  <h1>Fondo Ahorro - OCR + Duración</h1>
+  <h1>Fondo Ahorro - OCR Manual + Duración</h1>
 
   <label for="upload">Sube tu papeleta de nómina (opcional):</label>
   <input type="file" id="upload" accept="image/*,application/pdf">
+  <button id="processButton" style="display:none;">Procesar papeleta</button>
 
   <label for="sueldo">Sueldo mensual base (MXN):</label>
   <input type="number" id="sueldo" value="20000" />
@@ -48,6 +51,7 @@
     const aporteCFESpan = document.getElementById("aporteCFE");
     const totalFondoSpan = document.getElementById("totalFondo");
     const upload = document.getElementById("upload");
+    const processButton = document.getElementById("processButton");
 
     function calcular() {
       const sueldo = parseFloat(sueldoInput.value);
@@ -68,28 +72,36 @@
     duracionInput.addEventListener("change", calcular);
     calcular();
 
-    upload.addEventListener("change", async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+    let fileToProcess = null;
 
+    upload.addEventListener("change", (e) => {
+      fileToProcess = e.target.files[0];
+      if (fileToProcess) {
+        processButton.style.display = "block";
+      }
+    });
+
+    processButton.addEventListener("click", async () => {
+      if (!fileToProcess) return;
       const reader = new FileReader();
       reader.onload = async () => {
         const img = new Image();
         img.src = reader.result;
         img.onload = async () => {
-          const result = await Tesseract.recognize(img, 'spa', {
-            logger: m => console.log(m)
-          });
+          const result = await Tesseract.recognize(img, 'spa');
           const text = result.data.text;
-          const match = text.match(/(?:sueldo|salario).*?\$?(\d+[,.]\d+)/i);
+          const match = text.match(/(?:sueldo|salario).*?\\$?(\\d+[,.]\\d+)/i);
           if (match) {
             const sueldo = parseFloat(match[1].replace(',', '.'));
             sueldoInput.value = sueldo.toFixed(2);
             calcular();
+            alert("✅ Sueldo detectado y cargado.");
+          } else {
+            alert("⚠️ No se encontró un sueldo en el documento. Puedes ingresarlo manualmente.");
           }
         };
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(fileToProcess);
     });
   </script>
 </body>
