@@ -1,0 +1,80 @@
+:root {
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+body.dark {
+  background-color: #111827;
+  color: #f3f4f6;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+button, input, select {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Card */
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card.dark {
+  background-color: #1f2937;
+}
+
+/* Upload Area */
+.upload-area {
+  border: 2px dashed #9ca3af;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-area:hover {
+  background-color: #f3f4f6;
+}
+
+.upload-area.dark {
+  border-color: #4b5563;
+  background-color: #374151;
+}
+
+.upload-area.dark:hover {
+  background-color: #4b5563;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
