@@ -1,29 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Fondo Ahorro - Bienvenida</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#004d40"/>
-  <link rel="icon" href="icon-512.png">
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log("SW registrado"))
-        .catch(err => console.log("Error al registrar SW", err));
-    }
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fondo Ahorro CFE</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/icons/icon-192.png" />
+  <meta name="theme-color" content="#1e40af" />
 </head>
-<body style="text-align:center;padding:30px;font-family:sans-serif;">
-  <h1>Bienvenido a Fondo Ahorro</h1>
-  <img src="icon-512.png" width="128" height="128" alt="Icono">
-  <br><br>
-  <a href="fondo_ahorro_completo.html">
-    <button style="padding:12px 24px;font-size:16px;background:#004d40;color:white;border:none;border-radius:6px;">
-      Entrar a la App
-    </button>
-  </a>
+<body>
+  <div id="root"></div>
+  <script src="script.js"></script>
 </body>
 </html>
